@@ -26,11 +26,53 @@ int _printf(const char *format, ...) {
                     }
                     break;
                 }
+                case 'd':
+                case 'i': {
+                    int num = va_arg(args, int);
+                    printf("%d", num);
+                    count++;
+                    break;
+                }
+                case 'u': {
+                    unsigned int num = va_arg(args, unsigned int);
+                    printf("%u", num);
+                    count++;
+                    break;
+                }
+                case 'x': {
+                    unsigned int num = va_arg(args, unsigned int);
+                    printf("%x", num);
+                    count++;
+                    break;
+                }
+		case 'X': {
+		    unsigned int num = va_arg(args, unsigned int);
+                    printf("%X", num);
+                    count++;
+                    break;
+  		}
+		case 'o': {
+		    unsigned int num = va_arg(args, unsigned int);
+                    printf("%o", num);
+                    count++;
+                    break;
+  		}    
+                case 'p': {
+                    void *ptr = va_arg(args, void *);
+                    printf("%p", ptr);
+                    count++;
+                    break;
+                }
                 case '%':
                     putchar('%');
                     count++;
                     break;
-                }
+                default:
+                    putchar('%');
+                    putchar(*format);
+                    count += 2;
+                    break;
+            }
         } else {
             putchar(*format);
             count++;
